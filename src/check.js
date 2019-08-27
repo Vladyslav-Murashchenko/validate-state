@@ -6,7 +6,7 @@ export const isValidateSucceed = (errors) => {
   return Object.values(errors).every(isValidateSucceed);
 };
 
-export const isRequired = (value) => value != null && String(value);
+export const isRequired = (value) => value != null && !!String(value);
 
 export const isNumber = (value) => Number.isFinite(+value);
 export const isInteger = (value) => Number.isInteger(+value);

@@ -1,2 +1,2 @@
 # validate-state
-Create your custom validators of states and forms in a declarative way.
+Create your custom validators for states and forms in a declarative way.

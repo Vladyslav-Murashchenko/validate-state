@@ -3,7 +3,7 @@ import { isValueEmpty } from './check';
 export const required = (message) => {
   const validator = (value) => {
     if (isValueEmpty(value)) {
-      return message;
+      return [message];
     }
 
     return null;

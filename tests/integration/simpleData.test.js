@@ -14,12 +14,12 @@ const validateData = V.shape({
   name: V.required(NAME_REQUIRED),
   budget: V.first([
     V.required(BUDGET_REQUIRED),
-    V.value((n) => Number.parseFloat(n) === +n, SHOULD_BE_NUMBER),
+    V.value(V.check.isNumber, SHOULD_BE_NUMBER),
     V.value((n) => n >= 0, SHOULD_BE_ABOVE_ZERO),
   ]),
   duration: V.first([
     V.required(DURATION_REQUIRED),
-    V.value((n) => Number.parseInt(n) === +n, SHOULD_BE_INT),
+    V.value(V.check.isInteger, SHOULD_BE_INT),
     V.value((n) => n <= 5, SHOULD_BE_LTE_5),
   ]),
 });
@@ -55,9 +55,9 @@ describe('simple data', () => {
 
   it('work correct with empty data', () => {
     expect(validateData({})).toEqual({
-      name: NAME_REQUIRED,
-      budget: BUDGET_REQUIRED,
-      duration: DURATION_REQUIRED,
+      name: [NAME_REQUIRED],
+      budget: [BUDGET_REQUIRED],
+      duration: [DURATION_REQUIRED],
     });
   });
 
@@ -68,9 +68,9 @@ describe('simple data', () => {
         duration: '543543.43',
       }),
     ).toEqual({
-      name: NAME_REQUIRED,
-      budget: SHOULD_BE_NUMBER,
-      duration: SHOULD_BE_INT,
+      name: [NAME_REQUIRED],
+      budget: [SHOULD_BE_NUMBER],
+      duration: [SHOULD_BE_INT],
     });
   });
 
@@ -82,8 +82,8 @@ describe('simple data', () => {
         duration: '6',
       }),
     ).toEqual({
-      budget: SHOULD_BE_ABOVE_ZERO,
-      duration: SHOULD_BE_LTE_5,
+      budget: [SHOULD_BE_ABOVE_ZERO],
+      duration: [SHOULD_BE_LTE_5],
     });
   });
 });

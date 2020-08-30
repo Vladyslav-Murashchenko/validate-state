@@ -14,5 +14,5 @@ export const value = (check, errorMessage) => (value, context) => {
       ? errorMessage(value, context)
       : errorMessage;
 
-  return error;
+  return [error];
 };

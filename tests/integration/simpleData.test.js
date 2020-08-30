@@ -33,14 +33,6 @@ describe('simple data', () => {
         duration: 5,
       }),
     ).toEqual({});
-
-    expect(
-      validateData({
-        name: 'John',
-        budget: '100.',
-        duration: '5.',
-      }),
-    ).toEqual({});
   });
 
   it('work correct with correct data 2', () => {

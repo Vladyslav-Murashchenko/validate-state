@@ -1,16 +1,15 @@
-export const isValidateSucceed = (errors) => {
-  if (typeof errors !== 'object') {
-    return !errors;
-  }
+export const isValueEmpty = (value) =>
+  value == null || String(value).trim() === '';
 
-  return Object.values(errors).every(isValidateSucceed);
+export const isObjectEmpty = (errors) => {
+  return !Object.keys(errors).length;
 };
 
-export const isRequired = (value) => value != null && !!String(value);
+export const isValidationSucceed = (errors) => {
+  return errors === null || !Object.keys(errors).length;
+};
 
-export const isNumber = (value) => Number.isFinite(+value);
-export const isInteger = (value) => Number.isInteger(+value);
-export const isSafeInteger = (value) => +value < Number.MAX_SAFE_INTEGER;
-export const isAboveZero = (value) => +value > 0;
-export const isAboveOrEqualZero = (value) => +value >= 0;
-export const hasMaxTwoSignsAfterDot = (value) => !value.match(/\.\d{3}/);
+export const isValidationFailed = (errors) => !isValidationSucceed(errors);
+
+export const isNumber = (n) => Number.parseFloat(n) === +n;
+export const isInteger = (n) => Number.parseInt(n) === +n;

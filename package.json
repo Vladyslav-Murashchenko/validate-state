@@ -1,12 +1,12 @@
 {
   "name": "validate-state",
   "version": "0.1.0",
-  "description": "My webpack project",
+  "description": "Create your custom validators for states and forms in a declarative way.",
   "main": "lib/validate-state.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint src",
-    "build": "webpack"
+    "build": "microbundle"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,5 @@
+import { VALID } from './constants';
+
 export const isValueEmpty = (value) =>
   value == null || String(value).trim() === '';
 
@@ -6,7 +8,7 @@ export const isObjectEmpty = (errors) => {
 };
 
 export const isValidationSucceed = (errors) => {
-  return errors === null || !Object.keys(errors).length;
+  return errors === VALID || isObjectEmpty(errors);
 };
 
 export const isValidationFailed = (errors) => !isValidationSucceed(errors);

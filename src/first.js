@@ -1,4 +1,5 @@
 import { isValidationFailed } from './check';
+import { VALID } from './constants';
 
 export const first = (validators) => (value, context) => {
   return validators.reduce((acc, validator) => {
@@ -7,5 +8,5 @@ export const first = (validators) => (value, context) => {
     }
 
     return validator(value, context);
-  }, null);
+  }, VALID);
 };

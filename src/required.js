@@ -1,15 +1,10 @@
 import { isValueEmpty } from './check';
+import { VALID } from './constants';
 
-export const required = (message) => {
-  const validator = (value) => {
-    if (isValueEmpty(value)) {
-      return [message];
-    }
+export const required = (message) => (value) => {
+  if (isValueEmpty(value)) {
+    return [message];
+  }
 
-    return null;
-  };
-
-  validator.isRequired = true;
-
-  return validator;
+  return VALID;
 };

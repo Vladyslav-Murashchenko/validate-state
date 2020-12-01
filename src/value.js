@@ -1,12 +1,13 @@
 import { isValueEmpty } from './check';
+import { VALID } from './constants';
 
 export const value = (check, errorMessage) => (value, context) => {
-  if (!check.isRequired && isValueEmpty(value)) {
-    return null;
+  if (isValueEmpty(value)) {
+    return VALID;
   }
 
   if (check(value, context)) {
-    return null;
+    return VALID;
   }
 
   const error =

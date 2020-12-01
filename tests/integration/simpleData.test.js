@@ -10,6 +10,8 @@ const DURATION_REQUIRED = 'duration is required';
 const SHOULD_BE_INT = 'Should be integer';
 const SHOULD_BE_LTE_5 = 'Should be less then or equal 5';
 
+const MAX_10_CHARS = 'Should be max 10 chars';
+
 const validateData = V.shape({
   name: V.required(NAME_REQUIRED),
   budget: V.first([
@@ -19,9 +21,10 @@ const validateData = V.shape({
   ]),
   duration: V.first([
     V.required(DURATION_REQUIRED),
-    V.value(V.check.isInteger, SHOULD_BE_INT),
+    V.value(V.check.isInteger, () => SHOULD_BE_INT),
     V.value((n) => n <= 5, SHOULD_BE_LTE_5),
   ]),
+  comment: V.value((str) => str.length <= 10, MAX_10_CHARS),
 });
 
 describe('simple data', () => {
@@ -31,6 +34,7 @@ describe('simple data', () => {
         name: 'John',
         budget: 100,
         duration: 5,
+        comment: 'hi!',
       }),
     ).toEqual({});
   });
@@ -76,6 +80,19 @@ describe('simple data', () => {
     ).toEqual({
       budget: [SHOULD_BE_ABOVE_ZERO],
       duration: [SHOULD_BE_LTE_5],
+    });
+  });
+
+  it('work correct with wrong data 3', () => {
+    expect(
+      validateData({
+        name: 'John',
+        budget: 100,
+        duration: 5,
+        comment: 'too much characters here',
+      }),
+    ).toEqual({
+      comment: [MAX_10_CHARS],
     });
   });
 });

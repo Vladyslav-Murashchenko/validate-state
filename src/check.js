@@ -14,4 +14,4 @@ export const isValidationSucceed = (errors) => {
 export const isValidationFailed = (errors) => !isValidationSucceed(errors);
 
 export const isNumber = (n) => Number.parseFloat(n) === +n;
-export const isInteger = (n) => Number.parseInt(n) === +n;
+export const isInteger = (n) => Number.parseInt(n, 10) === +n;
